@@ -1,0 +1,209 @@
+{
+    "ApplicationName": "VoteChain",
+    "DisplayName": "VoteChain",
+    "Description": "A secure Voting App powered by Blockchain Technology. ",
+    "ApplicationRoles": [
+      {
+        "Name": "EC",
+        "Description": "Election Commission handles all the voting procedures."
+      },
+      {
+        "Name": "Voter",
+        "Description": "All registered users above the age of 18."
+      }
+    ],
+    "Workflows": [
+      {
+        "Name": "VoteChain",
+        "DisplayName": "VoteChain",
+        "Description": "Handles the voting procedures.",
+        "Initiators": [ "EC" ],
+        "StartState":  "Setup",
+        "Properties": [
+          {
+            "Name": "State",
+            "DisplayName": "State",
+            "Description": "Represents the current state of the election process.",
+            "Type": {
+              "Name": "state"
+            }
+          },
+          {
+            "Name": "EC",
+            "DisplayName": "Election Commission",
+            "Description": "...",
+            "Type": {
+              "Name": "EC"
+            }
+          },
+          {
+            "Name": "Voter",
+            "DisplayName": "Voter",
+            "Description": "...",
+            "Type": {
+              "Name": "Voter"
+            }
+          },
+          {
+            "Name": "CandidatesCount",
+            "DisplayName": "Candidates Count",
+            "Type": {
+              "Name": "int"
+            }
+          },
+          {
+            "Name": "cname",
+            "DisplayName": "Candidate name",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "pname",
+            "DisplayName": "Party name",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "candidateId",
+            "DisplayName": "ID of the Candidate",
+            "Type": {
+              "Name": "int"
+            }
+          },
+          {
+            "Name": "winner",
+            "DisplayName": "The Candidate with the majority.",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "Title",
+            "DisplayName": "Election Title",
+            "Type": {
+              "Name": "string"
+            }
+          }
+        ],
+        "Constructor": {
+          "Parameters": [{
+            "Name": "title",
+            "Description": "Election Title",
+            "DisplayName": "Election Title",
+            "Type": {
+              "Name": "string"
+            }
+          }]
+        },
+        "Functions": [
+          {
+            "Name": "AddCandidate",
+            "DisplayName": "Add Candidate",
+            "Description": "Add a new Candidate contesting for the Election",
+            "Parameters": [
+              {
+                "Name": "cname",
+                "Description": "Candidate Name",
+                "DisplayName": "Name",
+                "Type": {
+                  "Name": "string"
+                }
+              },
+              {
+                  "Name": "pname",
+                  "Description": "Party Name",
+                  "DisplayName": "Name",
+                  "Type": {
+                    "Name": "string"
+                  }
+              }
+            ]
+          },
+          {
+            "Name": "vote",
+            "DisplayName": "Vote",
+            "Description": "Vote for a particular candidate",
+            "Parameters": [{
+                "Name": "candidateId",
+                "Description": "Id of the Candidate",
+                "DisplayName": "Candidate ID",
+                "Type": {
+                  "Name": "int"
+                }
+              
+          }]
+          },
+          {
+            "Name": "resultCalc",
+            "DisplayName": "Show Results",
+            "Description": "Shows the winner of the election, i.e, the candidate with the majority",
+            "Parameters": []
+          },
+          {
+            "Name": "AllowVoting",
+            "DisplayName": "Start Voting Period",
+            "Description": "The voting period begins and the voters are allowed to vote.",
+            "Parameters": []
+          }
+        ],
+        "States": [
+          {
+            "Name": "Setup",
+            "DisplayName": "Setup",
+            "Description": "Setup Candidates",
+            "PercentComplete": 20,
+            "Style": "Success",
+            "Transitions": [
+              {
+                "AllowedRoles": ["EC"],
+                "AllowedInstanceRoles": ["EC"],
+                "DisplayName": "Add a Candidates",
+                "Function": "AddCandidate",
+                "NextStates": ["Setup"]
+              },
+              {
+                "AllowedRoles": ["EC"],
+                "AllowedInstanceRoles": ["EC"],
+                "DisplayName": "Start voting period",
+                "Function": "AllowVoting",
+                "NextStates": ["Voting"]
+              }
+            ]
+          },
+          {
+            "Name": "Voting",
+            "DisplayName": "Voting",
+            "Description": "Start Voting",
+            "PercentComplete": 60,
+            "Style": "Success",
+            "Transitions": [
+              {
+              "AllowedRoles": ["EC"],
+              "AllowedInstanceRoles": ["EC"],
+              "DisplayName": "Results",
+              "Function": "resultCalc",
+              "NextStates": ["Result"]
+            },
+            {
+              "AllowedRoles": ["Voter"],
+              "AllowedInstanceRoles": ["Voter"],
+              "DisplayName": "Vote",
+              "Function": "vote",
+              "NextStates": ["Voting"]
+            }
+          ]
+          },
+          {
+            "Name": "Result",
+            "DisplayName": "Results",
+            "Description": "Shows Result",
+            "PercentComplete": 100,
+            "Style": "Success",
+            "Transitions": []
+          }
+        ]
+      }
+    ]   
+  }
