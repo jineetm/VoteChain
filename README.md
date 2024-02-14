@@ -1,15 +1,5 @@
 # VOTECHAIN
 
-codefundo++ 2019
----
-## Team three-musketeers
-College - **IIT Kanpur**<br />
-Team members:-
-* [Nirmal Suthar](https://github.com/nirmal-suthar)
-* [Naman Biyani](https://github.com/namanbiyani)
-* [Sparsh Agarwal](https://github.com/sparshag21)
----
-
 # IDEA
 ## Abstract
 Elections, referenda, and polls are very important processes & tools for the smooth operation of a modern democracy.
