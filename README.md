@@ -82,5 +82,3 @@ This has been used to fully take advantage of the messaging API of Azure Blockch
 - Azure Active directory
 This has been used to keep track of all the voters and assign an ethereum id as a key value pair with their email id. Also, those who turn 18 are added to the Azure Active Directory and in this way no prospective voters are left out. A python script has been used to automatically find all those who turned 18 before the election and create a csv file. This csv file is now added directly to the Azure AD.
 
-# Demo Video
-[drive link](https://drive.google.com/open?id=1GZywzgENENdAc-QVJ0nhasrhkOTv1mN9)
